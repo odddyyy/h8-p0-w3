@@ -21,6 +21,14 @@ function groupAnimals(animals) {
     
   }
   
+  //sorting the array alphabetically
+  for (i=0;i<display.length;i++){
+    if (display[i] > display[i+1]){
+      let temp = display[i];
+      display[i] = display [i+1];
+      display [i+1] = temp;
+    }
+  }
   return display;
 }
 
