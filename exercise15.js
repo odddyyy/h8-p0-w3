@@ -1,34 +1,37 @@
 function groupAnimals(animals) {
   // you can only write your code here!
-  var firstChar = [];
-  var binatang = [];
-  var display = [];
+  var sortedAnimals = animals;
   
-  for (i=0;i<animals.length;i++){
-    firstChar = animals[i][0]; //storing first character of the given array
-    binatang = animals[i]; //assigning that first character animal to binatang
-    var temp = []; // resetting value of temp to empty
-    for (j=animals.length-1;j>i;j--){
-      if (firstChar === animals[j][0]){
-        binatang += `, ` + animals[j]; //adding the matching first character of animal array
-        animals.splice(j,1); //removing that matching animal so it wont be repeated in the loop
-        
+  //sorting array
+  for (i=0;i<sortedAnimals.length;i++){
+    for (j=0;j<sortedAnimals.length;j++){
+      if (sortedAnimals[i] < sortedAnimals[j] && i != j){
+        let temp = sortedAnimals [i];
+        sortedAnimals[i] = sortedAnimals [j];
+        animals[j] = temp;
       }
-      
     }
-    temp.push(binatang);
-    display.push(temp);
-    
   }
   
-  //sorting the array alphabetically
-  for (i=0;i<display.length;i++){
-    if (display[i] > display[i+1]){
-      let temp = display[i];
-      display[i] = display [i+1];
-      display [i+1] = temp;
+  //grouping animals with same first character
+  var display = [];
+  var firstChar = sortedAnimals[0][0];
+  var temp = [];
+  for (i=0;i<sortedAnimals.length;i++){
+    if(animals[i][0] == firstChar){
+      temp.push(sortedAnimals[i]);
+    }
+    else{
+      display.push(temp);
+      temp = [];
+      firstChar = animals[i][0];
+      temp.push(sortedAnimals[i]);
+    }
+    if (i === sortedAnimals.length-1){
+      display.push(temp);
     }
   }
+
   return display;
 }
 
